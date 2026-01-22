@@ -1,0 +1,13 @@
+{
+  "name": "amulya-business-consultant",
+  "version": "1.0.0",
+  "description": "Professional business consulting website",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "deploy": "echo 'Upload files to Netlify, GitHub Pages, or Vercel'"
+  },
+  "keywords": ["business", "consulting", "website"],
+  "author": "Amulya Business Consultant",
+  "license": "ISC"
+}
