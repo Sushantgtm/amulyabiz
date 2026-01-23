@@ -76,25 +76,176 @@ if (heroImage) {
     setInterval(changeImage, 5000);
 }
 
-// Contact Form Handling - Formspree
+// Contact Form Handling with Formspree Integration
+// This script handles form validation, submission, and user feedback
 const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        // Formspree handles the submission automatically
-        // Show loading state
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Sending...';
-        submitBtn.disabled = true;
 
-        // Formspree will redirect to thank-you page automatically
-        // This is just a fallback in case of issues
-        setTimeout(() => {
-            if (!window.location.href.includes('thank-you')) {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
+if (contactForm) {
+    // Get form elements for validation
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    const serviceSelect = document.getElementById('service');
+    const messageTextarea = document.getElementById('message');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoading = submitBtn.querySelector('.btn-loading');
+
+    // Get message containers
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+
+    // Validation patterns
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phonePattern = /^[\+]?[0-9\s\-\(\)]{7,20}$/;
+
+    // Real-time validation function
+    function validateField(field, pattern = null, minLength = 0) {
+        const value = field.value.trim();
+        const errorElement = document.getElementById(field.id + 'Error');
+        const formGroup = field.closest('.form-group');
+
+        // Reset previous error state
+        errorElement.textContent = '';
+        errorElement.classList.remove('show');
+        formGroup.classList.remove('error');
+
+        // Check if field is empty
+        if (field.hasAttribute('required') && !value) {
+            errorElement.textContent = 'This field is required';
+            errorElement.classList.add('show');
+            formGroup.classList.add('error');
+            return false;
+        }
+
+        // Check minimum length
+        if (minLength > 0 && value.length < minLength) {
+            errorElement.textContent = `Minimum ${minLength} characters required`;
+            errorElement.classList.add('show');
+            formGroup.classList.add('error');
+            return false;
+        }
+
+        // Check pattern validation
+        if (pattern && value && !pattern.test(value)) {
+            switch(field.id) {
+                case 'email':
+                    errorElement.textContent = 'Please enter a valid email address';
+                    break;
+                case 'phone':
+                    errorElement.textContent = 'Please enter a valid phone number';
+                    break;
+                default:
+                    errorElement.textContent = 'Please enter valid information';
             }
-        }, 5000);
+            errorElement.classList.add('show');
+            formGroup.classList.add('error');
+            return false;
+        }
+
+        return true;
+    }
+
+    // Add real-time validation to form fields
+    nameInput.addEventListener('blur', () => validateField(nameInput, null, 2));
+    emailInput.addEventListener('blur', () => validateField(emailInput, emailPattern));
+    phoneInput.addEventListener('blur', () => validateField(phoneInput, phonePattern, 7));
+    serviceSelect.addEventListener('blur', () => validateField(serviceSelect));
+    messageTextarea.addEventListener('blur', () => validateField(messageTextarea, null, 10));
+
+    // Form submission handler
+    contactForm.addEventListener('submit', function(e) {
+        // Prevent default form submission initially
+        e.preventDefault();
+
+        // Validate all fields before submission
+        const isNameValid = validateField(nameInput, null, 2);
+        const isEmailValid = validateField(emailInput, emailPattern);
+        const isPhoneValid = validateField(phoneInput, phonePattern, 7);
+        const isServiceValid = validateField(serviceSelect);
+        const isMessageValid = validateField(messageTextarea, null, 10);
+
+        // If any validation fails, stop submission
+        if (!isNameValid || !isEmailValid || !isPhoneValid || !isServiceValid || !isMessageValid) {
+            // Scroll to first error
+            const firstError = document.querySelector('.error-text.show');
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return;
+        }
+
+        // Hide any previous messages
+        successMessage.style.display = 'none';
+        errorMessage.style.display = 'none';
+
+        // Show loading state
+        submitBtn.disabled = true;
+        btnText.style.display = 'none';
+        btnLoading.style.display = 'flex';
+
+        // Prepare form data for submission
+        const formData = new FormData(contactForm);
+
+        // Submit form using fetch API for better error handling
+        fetch(contactForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Success - show success message
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+
+                // Reset form
+                contactForm.reset();
+
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // Hide success message after 5 seconds and redirect
+                setTimeout(() => {
+                    window.location.href = contactForm.querySelector('input[name="_next"]').value;
+                }, 3000);
+
+            } else {
+                // Handle Formspree errors
+                throw new Error('Form submission failed');
+            }
+        })
+        .catch(error => {
+            console.error('Form submission error:', error);
+
+            // Show error message
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'block';
+
+            // Scroll to error message
+            errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        })
+        .finally(() => {
+            // Reset button state
+            submitBtn.disabled = false;
+            btnText.style.display = 'inline';
+            btnLoading.style.display = 'none';
+        });
+    });
+
+    // Clear validation errors when user starts typing
+    [nameInput, emailInput, phoneInput, serviceSelect, messageTextarea].forEach(field => {
+        field.addEventListener('input', () => {
+            const errorElement = document.getElementById(field.id + 'Error');
+            const formGroup = field.closest('.form-group');
+
+            if (errorElement.classList.contains('show')) {
+                errorElement.classList.remove('show');
+                formGroup.classList.remove('error');
+            }
+        });
     });
 }
 
