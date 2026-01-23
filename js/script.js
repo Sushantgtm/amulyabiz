@@ -1,55 +1,55 @@
-// Theme Toggle Functionality
-const themeToggle = document.getElementById('theme-toggle');
-const body = document.body;
+// Test if script is loading
+console.log('Script loaded successfully!');
 
-// Check for saved theme preference or default to light mode
-const currentTheme = localStorage.getItem('theme') || 'light';
-if (currentTheme === 'dark') {
-    body.classList.add('dark-mode');
-    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-} else {
-    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-}
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM fully loaded');
 
-themeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    const theme = body.classList.contains('dark-mode') ? 'dark' : 'light';
-    localStorage.setItem('theme', theme);
-    
-    // Update icon
-    if (theme === 'dark') {
+    // Theme Toggle Functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Check for saved theme preference or default to light mode
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    if (currentTheme === 'dark') {
+        body.classList.add('dark-mode');
         themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
     } else {
         themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
     }
-});
 
-// Hamburger Menu Functionality
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
-
-if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        hamburger.classList.toggle('active');
-    });
-
-    // Close menu when clicking on a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            hamburger.classList.remove('active');
-        });
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-            navLinks.classList.remove('active');
-            hamburger.classList.remove('active');
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        const theme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+        localStorage.setItem('theme', theme);
+        
+        // Update icon
+        if (theme === 'dark') {
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
         }
     });
-}
+
+    // Hamburger Menu Functionality - Opens Main Menu Modal
+    const hamburger = document.querySelector('.hamburger');
+
+    console.log('Looking for hamburger...');
+    console.log('Hamburger found:', hamburger);
+
+    if (hamburger) {
+        console.log('✅ Hamburger menu setup successful');
+
+        // Simple click handler - opens main menu modal
+        hamburger.addEventListener('click', function() {
+            console.log('🎯 Hamburger clicked - opening main menu modal!');
+            openModal('main-menu');
+        });
+
+    } else {
+        console.error('❌ Hamburger not found!');
+    }
+});
 
 // Hero Image Slideshow
 const heroImages = [
@@ -150,3 +150,43 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Simple close function for menu links
+window.closeMainMenu = function() {
+    const mainMenuModal = document.getElementById('main-menu-modal');
+    if (mainMenuModal) {
+        closeModal(mainMenuModal);
+    }
+};
+
+// Modal functions for main menu only
+function openModal(modalId) {
+    const modal = document.getElementById(modalId + '-modal');
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeModal(modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside or on close button
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('modal-close') || e.target.classList.contains('modal')) {
+        const modal = e.target.closest('.modal') || e.target;
+        closeModal(modal);
+    }
+});
+
+// Close modal on Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const modals = document.querySelectorAll('.modal[style*="display: block"]');
+        modals.forEach(modal => closeModal(modal));
+    }
+});
+
+console.log('✅ Simple navigation setup complete');

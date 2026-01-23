@@ -18,7 +18,8 @@
         <div class="container">
             <div class="logo">
                 <img src="images/Logo.jpg" alt="Amulya Business Consultant Logo" class="logo-img">
-                <h1>Amulya Business Consultant</h1>
+                <h1 class="logo-full">Amulya Business Consultant</h1>
+                <h1 class="logo-short">ABC</h1>
             </div>
             <nav>
                 <ul class="nav-links">
@@ -28,15 +29,17 @@
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
-            <div class="theme-toggle">
-                <button id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon"></i>
+            <div class="navbar-right">
+                <div class="theme-toggle">
+                    <button id="theme-toggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                <button class="hamburger" aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
-            </div>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
             </div>
         </div>
     </header>
@@ -142,6 +145,36 @@
             </div>
         </div>
     </footer>
+
+    <!-- Main Menu Modal for Mobile Navigation -->
+    <div id="main-menu-modal" class="modal">
+        <div class="modal-content menu-modal">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header">
+                <h2>Menu</h2>
+            </div>
+            <div class="modal-body">
+                <div class="simple-menu">
+                    <a href="index.html" class="menu-btn" onclick="closeMainMenu()">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
+                    <a href="about.html" class="menu-btn" onclick="closeMainMenu()">
+                        <i class="fas fa-info-circle"></i>
+                        About Us
+                    </a>
+                    <a href="services.html" class="menu-btn" onclick="closeMainMenu()">
+                        <i class="fas fa-cogs"></i>
+                        Services
+                    </a>
+                    <a href="contact.html" class="menu-btn" onclick="closeMainMenu()">
+                        <i class="fas fa-envelope"></i>
+                        Contact
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="js/script.js"></script>
 </body>

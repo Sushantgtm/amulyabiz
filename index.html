@@ -18,7 +18,8 @@
         <div class="container">
             <div class="logo">
                 <img src="images/Logo.jpg" alt="Amulya Business Consultant Logo" class="logo-img">
-                <h1>Amulya Business Consultant</h1>
+                <h1 class="logo-full">Amulya Business Consultant</h1>
+                <h1 class="logo-short">ABC</h1>
             </div>
             <nav>
                 <ul class="nav-links">
@@ -28,15 +29,17 @@
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
-            <div class="theme-toggle">
-                <button id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon"></i>
+            <div class="navbar-right">
+                <div class="theme-toggle">
+                    <button id="theme-toggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                <button class="hamburger" aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
-            </div>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
             </div>
         </div>
     </header>
@@ -111,7 +114,7 @@
             </div>
         </section>
 
-        <section class="services">
+        <section id="services" class="services">
             <div class="container">
                 <h2>Our Services</h2>
                 <div class="cards">
@@ -152,7 +155,70 @@
         <section class="cta">
             <div class="container">
                 <h2>Ready to Start or Grow Your Business?</h2>
-                <a href="contact.html" class="btn btn-primary">Book Free Consultation →</a>
+                <a href="#contact" class="btn btn-primary">Book Free Consultation →</a>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2>Get In Touch</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+977-123-456-7890</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>info@amulyabiz.com.np</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Address</h4>
+                                <p>Kathmandu, Nepal</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Business Hours</h4>
+                                <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="contact-form" action="https://formspree.io/f/xpznqgkq" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="phone" placeholder="Your Phone">
+                        </div>
+                        <div class="form-group">
+                            <select name="service" required>
+                                <option value="">Select Service</option>
+                                <option value="company-registration">Company Registration</option>
+                                <option value="financial-consulting">Financial Consulting</option>
+                                <option value="audit-services">Audit Services</option>
+                                <option value="legal-compliance">Legal Compliance</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
             </div>
         </section>
     </main>
@@ -168,7 +234,7 @@
                 <div class="footer-links">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
                         <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
                         <li><a href="services.html"><i class="fas fa-cogs"></i> Services</a></li>
                         <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
@@ -188,6 +254,238 @@
             </div>
         </div>
     </footer>
+
+    <!-- Main Menu Modal -->
+    <div id="main-menu-modal" class="modal">
+        <div class="modal-content menu-modal">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header">
+                <h2>Menu</h2>
+            </div>
+            <div class="modal-body">
+                <div class="simple-menu">
+                    <a href="index.html" class="menu-btn" onclick="closeMainMenu()">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
+                    <a href="about.html" class="menu-btn" onclick="closeMainMenu()">
+                        <i class="fas fa-info-circle"></i>
+                        About Us
+                    </a>
+                    <a href="services.html" class="menu-btn" onclick="closeMainMenu()">
+                        <i class="fas fa-cogs"></i>
+                        Services
+                    </a>
+                    <a href="contact.html" class="menu-btn" onclick="closeMainMenu()">
+                        <i class="fas fa-envelope"></i>
+                        Contact
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="home-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header">
+                <h2>Welcome to Amulya Business Consultant</h2>
+            </div>
+            <div class="modal-body">
+                <div class="hero-content">
+                    <h1>Simplifying Business, Empowering Growth</h1>
+                    <p>Expert guidance in company registration, audits, and financial consulting. Your trusted partner for business success and compliance.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" data-modal="contact">Get Started</button>
+                        <button class="btn btn-secondary" data-modal="about">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="about-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header">
+                <h2>About Amulya Business Consultant</h2>
+            </div>
+            <div class="modal-body">
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Amulya Business Consultant is your trusted partner in business growth and compliance. With years of experience in company registration, financial consulting, and audit services, we help entrepreneurs and businesses navigate the complex world of regulations and achieve their goals.</p>
+                        <p>Our team of certified professionals provides comprehensive solutions tailored to your specific needs, ensuring your business operates smoothly and compliantly.</p>
+                        <div class="about-stats">
+                            <div class="stat-item">
+                                <h3>500+</h3>
+                                <p>Companies Registered</p>
+                            </div>
+                            <div class="stat-item">
+                                <h3>10+</h3>
+                                <p>Years Experience</p>
+                            </div>
+                            <div class="stat-item">
+                                <h3>100%</h3>
+                                <p>Client Satisfaction</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="services-modal" class="modal">
+        <div class="modal-content large-modal">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header">
+                <h2>Our Services</h2>
+            </div>
+            <div class="modal-body">
+                <div class="services-grid">
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3>Company Registration</h3>
+                        <p>Complete assistance with company registration, including Pvt Ltd, LLP, Partnership, and Proprietorship firms.</p>
+                        <ul>
+                            <li>Name availability check</li>
+                            <li>Document preparation</li>
+                            <li>Government filing</li>
+                            <li>Certificate collection</li>
+                        </ul>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3>Financial Consulting</h3>
+                        <p>Expert financial planning and consulting services to optimize your business finances and growth strategies.</p>
+                        <ul>
+                            <li>Financial planning</li>
+                            <li>Tax optimization</li>
+                            <li>Investment advice</li>
+                            <li>Cash flow management</li>
+                        </ul>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>Audit Services</h3>
+                        <p>Comprehensive audit services ensuring compliance and providing insights for business improvement.</p>
+                        <ul>
+                            <li>Statutory audits</li>
+                            <li>Internal audits</li>
+                            <li>Tax audits</li>
+                            <li>Compliance reviews</li>
+                        </ul>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h3>Legal Compliance</h3>
+                        <p>Complete legal compliance services to keep your business aligned with regulatory requirements.</p>
+                        <ul>
+                            <li>ROC compliance</li>
+                            <li>GST compliance</li>
+                            <li>Legal documentation</li>
+                            <li>Regulatory filings</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header">
+                <h2>Contact Us</h2>
+            </div>
+            <div class="modal-body">
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+977-123-456-7890</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>info@amulyabiz.com.np</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Address</h4>
+                                <p>Kathmandu, Nepal</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Business Hours</h4>
+                                <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="contact-form" action="https://formspree.io/f/xpznqgkq" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="phone" placeholder="Your Phone">
+                        </div>
+                        <div class="form-group">
+                            <select name="service" required>
+                                <option value="">Select Service</option>
+                                <option value="company-registration">Company Registration</option>
+                                <option value="financial-consulting">Financial Consulting</option>
+                                <option value="audit-services">Audit Services</option>
+                                <option value="legal-compliance">Legal Compliance</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Menu Modal for Mobile Navigation -->
+    <div id="main-menu-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Menu</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <nav class="mobile-nav">
+                    <ul>
+                        <li><a href="#home" onclick="closeMainMenu()">Home</a></li>
+                        <li><a href="about.html" onclick="closeMainMenu()">About Us</a></li>
+                        <li><a href="services.html" onclick="closeMainMenu()">Services</a></li>
+                        <li><a href="contact.html" onclick="closeMainMenu()">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
 
     <script src="js/script.js"></script>
 </body>
